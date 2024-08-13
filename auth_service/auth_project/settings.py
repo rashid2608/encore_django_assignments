@@ -25,7 +25,6 @@ SECRET_KEY = 'django-insecure-7!hsx#tc7j$7^%1k)9zjgnj7!j)00!ch(193cc4ji+54nb-7w!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -54,9 +53,16 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'auth-service']
+
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:8000",
+    "http://localhost:8001",
+    "http://auth-service:8000",
 ]
+
+CORS_ALLOW_ALL_ORIGINS = False
+
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [

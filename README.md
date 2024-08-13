@@ -19,7 +19,8 @@ encore_django_assignments/
 │   │   ├── views.py
 │   │   └── ...
 │   ├── manage.py
-│   └── requirements.txt
+│   ├── requirements.txt
+│   └── Dockerfile
 │
 ├── courses_service/
 │   ├── courses_project/
@@ -31,13 +32,39 @@ encore_django_assignments/
 │   │   ├── auth.py
 │   │   └── ...
 │   ├── manage.py
-│   └── requirements.txt
+│   ├── requirements.txt
+│   └── Dockerfile
 │
+├── docker-compose.yml
 ├── .gitignore
 └── README.md
 ```
 
 ## Setup
+
+### Using Docker Compose (Recommended)
+
+1. Clone the repository:
+   ```
+   git clone https://github.com/rashid2608/encore_django_assignments.git
+   cd encore_django_assignments
+   ```
+
+2. Build and run the services:
+   ```
+   docker-compose up --build
+   ```
+
+3. Create a superuser for the Auth Service:
+   ```
+   docker-compose exec auth-service python manage.py createsuperuser
+   ```
+
+The services will be available at:
+- Auth Service: http://localhost:8000
+- Courses Service: http://localhost:8001
+
+### Manual Setup (Alternative)
 
 1. Clone the repository:
    ```
@@ -85,6 +112,7 @@ encore_django_assignments/
 - Custom Authentication in Django Rest Framework
 - Inter-service Communication
 - API Design and Implementation
+- Docker and Docker Compose for containerization
 
 ## Contributing
 

@@ -5,6 +5,7 @@ import logging
 from rest_framework import authentication
 from rest_framework import exceptions
 from django.contrib.auth.models import User
+import os
 
 logger = logging.getLogger(__name__)
 
@@ -23,9 +24,12 @@ class CustomTokenAuthentication(authentication.BaseAuthentication):
             logger.error("Invalid token header format")
             raise exceptions.AuthenticationFailed('Invalid token header')
 
+        auth_service_url = os.environ.get('AUTH_SERVICE_URL', 'http://localhost:8000')
+        verify_token_url = f"{auth_service_url}/verify-token/"
+
         # Make a request to your auth service to validate the token
         try:
-            response = requests.post('http://localhost:8000//verify-token/', data={'token': token})
+            response = requests.post(verify_token_url, data={'token': token})
             logger.info(f"Auth service response status: {response.status_code}")
         except requests.RequestException as e:
             logger.error(f"Error contacting auth service: {str(e)}")
