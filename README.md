@@ -17,10 +17,13 @@ encore_django_assignments/
 │   │   └── ...
 │   ├── auth_app/
 │   │   ├── views.py
+│   │   ├── tests/
+│   │   │   └── test_views.py
 │   │   └── ...
 │   ├── manage.py
 │   ├── requirements.txt
-│   └── Dockerfile
+│   ├── Dockerfile
+│   ├── pytest.ini
 │
 ├── courses_service/
 │   ├── courses_project/
@@ -30,10 +33,14 @@ encore_django_assignments/
 │   ├── courses_app/
 │   │   ├── views.py
 │   │   ├── auth.py
+│   │   ├── tests/
+│   │   │   ├── test_views.py
+│   │   │   └── test_auth.py
 │   │   └── ...
 │   ├── manage.py
 │   ├── requirements.txt
-│   └── Dockerfile
+│   ├── Dockerfile
+│   ├── pytest.ini
 │
 ├── docker-compose.yml
 ├── .gitignore
@@ -42,29 +49,7 @@ encore_django_assignments/
 
 ## Setup
 
-### Using Docker Compose (Recommended)
-
-1. Clone the repository:
-   ```
-   git clone https://github.com/rashid2608/encore_django_assignments.git
-   cd encore_django_assignments
-   ```
-
-2. Build and run the services:
-   ```
-   docker-compose up --build
-   ```
-
-3. Create a superuser for the Auth Service:
-   ```
-   docker-compose exec auth-service python manage.py createsuperuser
-   ```
-
-The services will be available at:
-- Auth Service: http://localhost:8000
-- Courses Service: http://localhost:8001
-
-### Manual Setup (Alternative)
+### Manual Setup
 
 1. Clone the repository:
    ```
@@ -93,6 +78,30 @@ The services will be available at:
    python manage.py runserver 8001
    ```
 
+### Using Docker Compose (Recommended)
+
+1. Clone the repository:
+   ```
+   git clone https://github.com/rashid2608/encore_django_assignments.git
+   cd encore_django_assignments
+   ```
+
+2. Build and run the services:
+   ```
+   docker-compose up --build
+   ```
+
+3. Create a superuser for the Auth Service:
+   ```
+   docker-compose exec auth-service python manage.py createsuperuser
+   ```
+
+The services will be available at:
+- Auth Service: http://localhost:8000
+- Courses Service: http://localhost:8001
+
+
+
 ## Usage
 
 1. Obtain a token from the Auth Service:
@@ -105,6 +114,54 @@ The services will be available at:
    curl -H "Authorization: Token your_token_here" http://localhost:8001/courses/?page=1&page_size=5&fields=name,org
    ```
 
+## Running Tests and Coverage
+
+To run the tests and generate coverage reports:
+
+1. For the Auth Service:
+   ```
+   cd auth_service
+   coverage run -m pytest
+   coverage report
+   coverage html
+   ```
+
+2. For the Courses Service:
+   ```
+   cd courses_service
+   coverage run -m pytest
+   coverage report
+   coverage html
+   ```
+
+The HTML coverage reports will be generated in the `htmlcov` directory of each service. Open `htmlcov/index.html` in a web browser to view the detailed coverage report.
+
+You can combine these commands:
+```
+coverage run -m pytest && coverage report && coverage html
+```
+
+To check report on browser run below command:
+#macos
+   open htmlcov/index.html
+#linux
+   xdg-open htmlcov/index.html 
+#windows
+   start htmlcov/index.html 
+
+This will run the tests, display a text report, and generate an HTML report in one command.
+
+## Test Structure
+
+- Auth Service tests are located in `auth_service/auth_app/tests/`
+- Courses Service tests are located in `courses_service/courses_app/tests/`
+
+The tests cover various aspects of the services, including:
+- API endpoints functionality
+- Authentication and authorization
+- Inter-service communication
+- Edge cases and error handling
+
 ## Learning Points
 
 - Microservices Architecture
@@ -113,10 +170,16 @@ The services will be available at:
 - Inter-service Communication
 - API Design and Implementation
 - Docker and Docker Compose for containerization
+- Unit Testing in Django
+- Test Coverage Analysis
 
 ## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Contributions are welcome! Please feel free to submit a Pull Request. When contributing, please:
+- Write tests for new features or bug fixes
+- Ensure all tests pass and maintain or improve coverage
+- Follow the existing code style and project structure
+- Use Conventional Commits for commit messages (https://www.conventionalcommits.org/)
 
 ## License
 

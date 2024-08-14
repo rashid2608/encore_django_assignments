@@ -30,11 +30,13 @@ class VerifyToken(APIView):
 
     def post(self, request, *args, **kwargs):
         token_key = request.data.get('token')
-        logger.info(f"Received token verification request for token: {token_key[:5]}...")
+       
 
         if not token_key:
             logger.warning("No token provided in request")
             return Response({"error": "No token provided"}, status=status.HTTP_400_BAD_REQUEST)
+        
+        logger.info(f"Received token verification request for token: {token_key[:5]}...")
 
         try:
             token = Token.objects.select_related('user').get(key=token_key)
