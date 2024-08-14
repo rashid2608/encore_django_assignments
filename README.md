@@ -191,7 +191,3 @@ Contributions are welcome! Please feel free to submit a Pull Request. When contr
 - Ensure all tests pass and maintain or improve coverage
 - Follow the existing code style and project structure
 - Use Conventional Commits for commit messages (https://www.conventionalcommits.org/)
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
