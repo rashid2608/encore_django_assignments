@@ -88,7 +88,7 @@ encore_django_assignments/
 
 2. Build and run the services:
    ```
-   docker-compose up --build
+   docker-compose up --build -d
    ```
 
 3. Create a superuser for the Auth Service:
