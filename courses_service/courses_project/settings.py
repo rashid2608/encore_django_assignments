@@ -71,12 +71,14 @@ TEMPLATES = [
     },
 ]
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'auth-service']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'auth-service', '20.2.84.16']
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:8000",
     "http://localhost:8001",
     "http://auth-service:8000",
+    "http://20.2.84.16:8000",
+    "http://20.2.84.16:8001",
 ]
 
 CORS_ALLOW_ALL_ORIGINS = False

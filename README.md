@@ -111,7 +111,8 @@ The services will be available at:
 
 2. Use the token to access the Courses Service:
    ```
-   curl -H "Authorization: Token your_token_here" http://localhost:8001/courses/?page=1&page_size=5&fields=name,org
+   curl -H "Authorization: Token Your_token_here" "http://localhost:8001/courses/?page=1&page_size=5&fields=name,org"
+
    ```
 
 ## Running Tests and Coverage
