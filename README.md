@@ -5,6 +5,24 @@ This project demonstrates a simple microservices architecture using Django and D
 1. Authentication Service
 2. Courses Service
 
+## Prerequisites
+
+Before you begin, ensure you have the following installed on your system:
+- Python 3.8 or higher
+- pip (Python package manager)
+- Git
+- Docker
+- Docker Compose
+
+You can check if these are installed by running the following commands:
+```
+python --version
+pip --version
+git --version
+docker --version
+docker-compose --version
+```
+
 ## Project Structure
 
 ```
@@ -49,7 +67,29 @@ encore_django_assignments/
 
 ## Setup
 
-### Manual Setup
+### Using Docker Compose (Recommended)
+
+1. Clone the repository:
+   ```
+   git clone https://github.com/rashid2608/encore_django_assignments.git
+   cd encore_django_assignments
+   ```
+
+2. Build and run the services:
+   ```
+   docker-compose up --build -d
+   ```
+
+3. Create a superuser for the Auth Service:
+   ```
+   docker-compose exec auth-service python manage.py createsuperuser
+   ```
+
+The services will be available at:
+- Auth Service: http://localhost:8000
+- Courses Service: http://localhost:8001
+
+### Manual Setup (Alternative)
 
 1. Clone the repository:
    ```
@@ -78,30 +118,6 @@ encore_django_assignments/
    python manage.py runserver 8001
    ```
 
-### Using Docker Compose (Recommended)
-
-1. Clone the repository:
-   ```
-   git clone https://github.com/rashid2608/encore_django_assignments.git
-   cd encore_django_assignments
-   ```
-
-2. Build and run the services:
-   ```
-   docker-compose up --build
-   ```
-
-3. Create a superuser for the Auth Service:
-   ```
-   docker-compose exec auth-service python manage.py createsuperuser
-   ```
-
-The services will be available at:
-- Auth Service: http://localhost:8000
-- Courses Service: http://localhost:8001
-
-
-
 ## Usage
 
 1. Obtain a token from the Auth Service:
@@ -111,7 +127,7 @@ The services will be available at:
 
 2. Use the token to access the Courses Service:
    ```
-   curl -H "Authorization: Token your_token_here" http://localhost:8001/courses/?page=1&page_size=5&fields=name,org
+   curl -H "Authorization: Token Your_token_here" "http://localhost:8001/courses/?page=1&page_size=5&fields=name,org"
    ```
 
 ## Running Tests and Coverage
@@ -141,15 +157,10 @@ You can combine these commands:
 coverage run -m pytest && coverage report && coverage html
 ```
 
-To check report on browser run below command:
-#macos
-   open htmlcov/index.html
-#linux
-   xdg-open htmlcov/index.html 
-#windows
-   start htmlcov/index.html 
-
-This will run the tests, display a text report, and generate an HTML report in one command.
+To check the report in a browser, run:
+- macOS: `open htmlcov/index.html`
+- Linux: `xdg-open htmlcov/index.html`
+- Windows: `start htmlcov/index.html`
 
 ## Test Structure
 
